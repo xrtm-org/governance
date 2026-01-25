@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://governance.xrtm.org/schemas/forecast_object_v1.json",
+  "title": "xrtm Forecast Object Standard (v1)",
+  "description": "Standardized schema for high-intelligence forecasting, emphasizing Zero Leakage, Calibration, and Bayesian Reasoning Chains.",
+  "type": "object",
+  "required": [
+    "metadata",
+    "question",
+    "prediction"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Operational and contextual metadata for the forecast record.",
+      "required": [
+        "id",
+        "created_at",
+        "snapshot_time"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this specific forecast instance."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The ISO 8601 timestamp when the forecast was generated."
+        },
+        "snapshot_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Zero Leakage: The specific 'Time T' at which the world state was frozen for this forecast. No data after this timestamp should have been available to the model."
+        },
+        "source_version": {
+          "type": "string",
+          "description": "The version of the inference engine (xrtm-forecast) or model used."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Logical tags for categorization (e.g., 'macro-economics', 'geopolitical')."
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "description": "The subject of the forecast.",
+      "required": [
+        "id",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the underlying question."
+        },
+        "title": {
+          "type": "string",
+          "description": "The core question or statement being forecasted."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed context, background, and specific definitions."
+        },
+        "resolution_criteria": {
+          "type": "string",
+          "description": "The explicit, non-ambiguous rules for how the ground truth will be determined."
+        }
+      }
+    },
+    "prediction": {
+      "type": "object",
+      "description": "The probabilistic output and justification.",
+      "required": [
+        "probability",
+        "reasoning_trace"
+      ],
+      "properties": {
+        "probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The assigned probability of the primary outcome occurring."
+        },
+        "confidence_interval": {
+          "type": "object",
+          "description": "The range of possible outcomes at a specified confidence level (e.g., 5th and 95th percentiles).",
+          "properties": {
+            "low": {
+              "type": "number"
+            },
+            "high": {
+              "type": "number"
+            },
+            "level": {
+              "type": "number",
+              "default": 0.9,
+              "description": "The confidence level (e.g., 0.9 for a 90% interval)."
+            }
+          }
+        },
+        "reasoning_trace": {
+          "type": "object",
+          "description": "The Bayesian-style sequence of assumptions and causal logic.",
+          "required": [
+            "narrative"
+          ],
+          "properties": {
+            "narrative": {
+              "type": "string",
+              "description": "A comprehensive narrative argument supporting the forecast."
+            },
+            "causal_graph": {
+              "type": "object",
+              "description": "The structured Mental Model representing the causal logic.",
+              "properties": {
+                "nodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "node_id",
+                      "event"
+                    ],
+                    "properties": {
+                      "node_id": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "string",
+                        "description": "An assumption or intermediate event in the reasoning chain."
+                      },
+                      "probability": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "edges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "source",
+                      "target"
+                    ],
+                    "properties": {
+                      "source": {
+                        "type": "string",
+                        "description": "ID of the source node."
+                      },
+                      "target": {
+                        "type": "string",
+                        "description": "ID of the target node."
+                      },
+                      "weight": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "description": "The conditional probability or causal strength."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "calibration_metrics": {
+          "type": "object",
+          "description": "Self-assessed or system-derived metrics for probabilistic integrity.",
+          "properties": {
+            "expected_brier_score": {
+              "type": "number"
+            },
+            "self_calibration_score": {
+              "type": "number",
+              "description": "The model's own estimate of how calibrated it is on this specific domain."
+            }
+          }
+        }
+      }
+    }
+  }
+}
