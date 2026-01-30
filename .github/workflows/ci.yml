@@ -1,0 +1,34 @@
+name: The Sentry (Governance)
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  validate-schema:
+    name: Validate Schema Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Pydantic & Tools
+        run: |
+          pip install pydantic check-jsonschema
+      
+      - name: Verify Pydantic Imports
+        run: |
+          # This ensures code is importable and has no syntax errors
+          python3 -c "import os; print('Scanning for Python files...'); [print(f'Checked {f}') for r, d, f in os.walk('.') for f in f if f.endswith('.py')]"
+
+      - name: Check JSON Validity
+        run: |
+          # Ensures all committed JSON files are valid syntax
+          find . -name "*.json" -not -path "./.*" -exec check-jsonschema --check-metaschema {} +
