@@ -1,6 +1,7 @@
 ---
-# AGENT CONFIGURATION: xrtm-governance NODE
-# IDENTITY: THE LAW
+agent_node: xrtm-governance
+identity: THE LAW
+---
 
 ### 1. [PRIME DIRECTIVES] (Shared Core)
 - **Tech Stack**: Python, Pydantic, Polars.
