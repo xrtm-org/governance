@@ -74,7 +74,7 @@ The weighted average gap between confidence and accuracy across bins.
 
 ### Forecast Object
 The standard structured output for all predictions (see Governance schema).
-*   *Package*: `xrtm.data.schemas.forecast`
+*   *Package*: `xrtm.data.core.schemas`
 
 ### Snapshot Time
 The temporal boundary for zero-leakage forecasting. No data after this time should influence predictions.

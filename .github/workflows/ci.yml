@@ -22,7 +22,6 @@ jobs:
       - name: Install Pydantic & Tools
         run: |
           pip install pydantic check-jsonschema
-      
       - name: Verify Pydantic Imports
         run: |
           # This ensures code is importable and has no syntax errors
