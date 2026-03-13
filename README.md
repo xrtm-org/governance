@@ -13,9 +13,10 @@ We separate our "Standards" from our "Implementation" to ensure consistency acro
 
 ### 1. The Forecast Object
 All inference engines and evaluation tools must exchange data using the **Forecast Object Standard**.
-* **Current Version:** v1
-* **Definition:** [schemas/forecast_object_v1.json](schemas/forecast_object_v1.json)
-* **Key Features:** Enforces strict fields for `snapshot_time` (Zero Leakage), `reasoning_trace` (Causal Graphs), and `confidence_interval`.
+* **Current Version:** v1.1
+* **Definition:** [schemas/forecast_object_v1.1.json](schemas/forecast_object_v1.1.json)
+* **Previous Version:** [schemas/forecast_object_v1.json](schemas/forecast_object_v1.json)
+* **Key Features:** Enforces strict fields for `snapshot_time` (Zero Leakage), `reasoning_trace` (Causal Graphs), and `confidence_interval`. v1.1 adds optional parametric `distribution` support (Beta, Gaussian Bounded) for epistemic uncertainty.
 
 ## The Ecosystem
 This governance repository defines the standards for the following software components:
