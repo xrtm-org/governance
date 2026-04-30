@@ -2,6 +2,8 @@
 
 This policy is the shared decision record for reviewing pull requests across the XRTM organization. Treat open PRs as evidence and candidate implementations, not as changes to merge automatically.
 
+For release publication gates, use this policy together with `policies/release-readiness-policy.md`.
+
 ## Decision categories
 
 Use one decision for each PR or PR family.
