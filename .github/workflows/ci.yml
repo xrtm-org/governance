@@ -19,9 +19,14 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
       - name: Install Pydantic & Tools
         run: |
-          pip install pydantic check-jsonschema
+          uv pip install pydantic check-jsonschema --system
       - name: Verify Pydantic Imports
         run: |
           # This ensures code is importable and has no syntax errors

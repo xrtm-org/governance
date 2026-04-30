@@ -32,6 +32,6 @@ identity: THE LAW
 
 ### 3. [PROACTIVE GUARDRAILS] (Behavior)
 - **ON WAKE**: Check for CI failures and uncommitted changes. Run `uv run ruff check .` to ensure compliance.
-- **ON PR**: Validate that no breaking schema changes are introduced. Ensure `AGENTS.md` and rule files remain consistent.
+- **ON PR**: Read `policies/pr-acceptance-policy.md` before accepting, superseding, rejecting, or deferring PRs. Validate that no breaking schema changes are introduced. Ensure `AGENTS.md` and rule files remain consistent.
 - **ON FAILURE**: Auto-fix formatting (`ruff format`) and type errors where deterministic. If a schema violation is detected, HALT and request user intervention.
 ---
