@@ -36,3 +36,12 @@ When building a new tool or agent for xrtm:
 2. **Validate Outputs:** Ensure your code produces JSON that validates against the schemas in this repo.
 3. **Propose Changes:** To change a standard (e.g., adding a field to the Forecast Object), submit a Pull Request to this repository first.
 4. **Review PRs Carefully:** Do not merge every open PR. Apply the [PR Acceptance Policy](policies/pr-acceptance-policy.md) and record whether a PR is accepted as-is, accepted with changes, superseded, rejected, or deferred.
+
+## Triage and Review Process
+To ensure consistent and reproducible decisions for PRs and issues:
+* **Before Reviewing:** Read the [Triage Matrix](policies/triage-matrix.md) to classify PRs and issues by scope, priority, risk, and compatibility impact.
+* **During Review:** Apply the decision criteria from [PR Acceptance Policy](policies/pr-acceptance-policy.md).
+* **After Decision:** Record the disposition, rationale, and evidence in [PR Disposition Log](policies/pr-disposition-log.md).
+* **Communication:** Use triage labels (`disposition:*`, `priority:*`, `scope:*`, `type:*`) and add brief comments to PRs/issues explaining next steps.
+
+The triage process makes implicit knowledge explicit, enabling maintainers to track patterns, avoid redundant discussions, and provide clear feedback to contributors.
