@@ -1,6 +1,6 @@
 # xrtm Governance
 
-**Current Status:** Phase 1 (Foundation)
+**Current Status:** Phase 1 (Foundation) · Zero-backlog baseline recorded (2026-05-01)
 
 This repository serves as the central source of truth for the **xrtm** organization. It contains the core philosophy, architectural standards, and data schemas that all xrtm tools must adhere to.
 
@@ -9,6 +9,8 @@ We separate our "Standards" from our "Implementation" to ensure consistency acro
 * **Philosophy:** To understand the "Why" behind our focus on forecasting and zero leakage, read [MISSION.md](MISSION.md).
 * **Technical Standards:** To understand the data structures required for interoperability, see the [schemas/](schemas/) directory.
 * **PR Acceptance:** To decide whether to accept, modify, supersede, reject, or defer pull requests, use [policies/pr-acceptance-policy.md](policies/pr-acceptance-policy.md).
+* **Release Readiness:** For release publication gates including corpus-aware validation and performance budgets, see [policies/release-readiness-policy.md](policies/release-readiness-policy.md).
+* **Product Story & Structure:** For canonical rerun rules, macro-reorg triggers, and the XRTM story hierarchy, see [policies/product-story-and-architecture-guardrails.md](policies/product-story-and-architecture-guardrails.md).
 
 ## Core Standards
 
