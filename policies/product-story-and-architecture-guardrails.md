@@ -122,22 +122,27 @@ Examples that **do not** count:
 
 ### Primary story
 
-XRTM is a **forecasting and model-evaluation stack** for probabilistic forecasts.
+XRTM is **AI for event forecasting**.
 
-Its main value is:
+AI can already generate plausible answers. The bigger opportunity is using AI to
+forecast real-world events, keep a durable record of predictions, measure
+accuracy, and get better over time.
 
-- reproducible forecasting workflows
-- benchmark and validation discipline
-- operational history, reporting, and monitoring
-- local-first development and evaluation
+Its core value loop is:
 
-### Proof-point order
+- forecast real-world events
+- track predictions and evidence
+- measure accuracy and calibration
+- improve the system over time
 
-All public-facing surfaces should tell the story in this order:
+### Proof/workflow order
+
+All public-facing surfaces should prove that story with these workflows, in this
+order:
 
 1. **Provider-free first success**
+   - prove the event-forecasting loop quickly
    - no API key
-   - no cloud dependency
    - deterministic first run
 
 2. **Benchmark and validation workflow**
@@ -151,7 +156,7 @@ All public-facing surfaces should tell the story in this order:
    - export decision-friendly artifacts
 
 4. **Local-LLM advanced path**
-   - strong differentiator
+   - advanced capability
    - privacy/local-control story
    - power-user path
 
@@ -169,7 +174,19 @@ That means:
 
 If a page has only one short explanation of XRTM, it should say some version of:
 
-> XRTM is a local-first forecasting and model-evaluation stack for probabilistic forecasts. It helps teams run reproducible forecast workflows, validate quality, and inspect results over time.
+> XRTM is AI for event forecasting. It helps teams forecast real-world events,
+> track predictions, measure accuracy, and improve over time.
+
+### Page-role rule
+
+Do not make every page repeat the same paragraph. The message should stay
+recognizable, but each page must do a distinct job:
+
+- **hero / homepage**: category statement
+- **intro / getting started**: why now and the first value loop
+- **workflow pages**: proof
+- **package READMEs**: package role inside the system
+- **governance docs**: canonical wording and anti-drift policy
 
 ### Anti-drift rule
 
@@ -179,7 +196,9 @@ The following repos own the following truths:
 - `data`, `forecast`, and `xrtm` own product/package behavior in their domains
 - `xrtm.org` explains and presents the ecosystem, but does not become the only authority
 
-If site/docs copy a policy or architecture claim, they must link back to the canonical owner.
+If site/docs copy a policy or architecture claim, they must link back to the
+canonical owner. Keep category wording aligned, but let each page contribute a
+different layer of the story instead of forcing slogan repetition.
 
 ## Review cadence
 
