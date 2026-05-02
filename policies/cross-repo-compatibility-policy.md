@@ -8,6 +8,7 @@ Use this policy together with:
 
 - `policies/pr-acceptance-policy.md` for merge decisions
 - `policies/release-readiness-policy.md` for release publication gates
+- `policies/release-train-playbook.md` for the explicit operating checklist for coordinated PR families and releases
 
 ## Stable contract surfaces vs. internal surfaces
 

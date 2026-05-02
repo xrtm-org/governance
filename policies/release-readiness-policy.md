@@ -2,6 +2,8 @@
 
 This policy defines the minimum gates for coordinated XRTM releases. It complements the PR acceptance policy: PR review decides whether a change is worth merging; release readiness decides whether the merged stack is safe to publish.
 
+For the explicit operating sequence for linked PRs, dependency-order merges, workflow inputs, and post-merge validation, use `policies/release-train-playbook.md` together with this policy.
+
 ## Supported runtime boundary
 
 All released Python packages must declare only the Python versions that are validated by CI and release smoke tests.
@@ -56,4 +58,3 @@ Do not publish if any of these are true:
 - Product smoke fails in provider-free mode.
 - Local LLM smoke fails after bounded retry when the change affects provider/local-model behavior.
 - Documentation claims support for versions, commands, or provider behavior that is not validated.
-

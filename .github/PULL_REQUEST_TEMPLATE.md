@@ -18,12 +18,22 @@ Please describe validation performed:
 - [ ] Documentation changes reviewed for accuracy and clarity
 - [ ] Breaking changes include migration guide
 
+## Cross-repo coordination
+Complete this section when the change affects contracts, compatibility guidance, release sequencing, or cross-repo CI behavior.
+
+- Coordination record: <!-- issue / PR family / release-train note, or N/A -->
+- Affected repositories: <!-- governance, data, eval, forecast, train, xrtm, xrtm.org, or N/A -->
+- Exact refs or releases to validate downstream against: <!-- branch / tag / SHA / PR ref, or N/A -->
+- Post-merge follow-up: <!-- downstream workflow runs, PRs, or release steps, or N/A -->
+
 ## Checklist:
 - [ ] I have performed a self-review of my own changes
 - [ ] Changes follow existing governance documentation style and conventions
 - [ ] I have verified links and references are correct
 - [ ] Schema changes preserve backward compatibility or include explicit migration path
 - [ ] Policy changes align with existing XRTM philosophy and goals
+- [ ] Coordinated changes use explicit refs and follow the release-train playbook instead of same-branch assumptions
+- [ ] Post-merge validation or release-train follow-up is recorded when downstream repositories are affected
 
 ---
 

@@ -9,6 +9,8 @@ We separate our "Standards" from our "Implementation" to ensure consistency acro
 * **Philosophy:** To understand the "Why" behind our focus on forecasting and zero leakage, read [MISSION.md](MISSION.md).
 * **Technical Standards:** To understand the data structures required for interoperability, see the [schemas/](schemas/) directory.
 * **PR Acceptance:** To decide whether to accept, modify, supersede, reject, or defer pull requests, use [policies/pr-acceptance-policy.md](policies/pr-acceptance-policy.md).
+* **Release Readiness:** For coordinated release gates and publication checks, see [policies/release-readiness-policy.md](policies/release-readiness-policy.md).
+* **Release Train Playbook:** For the explicit day-to-day operating path for coordinated multi-repo work, see [policies/release-train-playbook.md](policies/release-train-playbook.md).
 
 ## Core Standards
 
@@ -36,6 +38,7 @@ When building a new tool or agent for xrtm:
 2. **Validate Outputs:** Ensure your code produces JSON that validates against the schemas in this repo.
 3. **Propose Changes:** To change a standard (e.g., adding a field to the Forecast Object), submit a Pull Request to this repository first.
 4. **Review PRs Carefully:** Do not merge every open PR. Apply the [PR Acceptance Policy](policies/pr-acceptance-policy.md) and record whether a PR is accepted as-is, accepted with changes, superseded, rejected, or deferred.
+5. **Coordinate Explicitly:** When a change crosses repository boundaries, follow the [Release Train Playbook](policies/release-train-playbook.md) so linked PRs, exact refs, dependency order, and post-merge validation stay visible.
 
 ## Triage and Review Process
 To ensure consistent and reproducible decisions for PRs and issues:
