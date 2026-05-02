@@ -21,6 +21,8 @@ Before publishing any package release:
 3. A clean supported-Python environment must install the candidate release and run the package's CLI/import smoke.
 4. Cross-package changes must be validated in dependency order.
 5. Documentation must mention user-visible behavior changes, compatibility changes, and known unsupported environments.
+6. Corpus-aware validation must pass using a Tier 1 release-gate-approved corpus with sufficient coverage (`xrtm validate run --release-gate-mode`).
+7. Performance budgets must be met for the appropriate scenario (`xrtm perf run --fail-on-budget`).
 
 Before publishing a coordinated stack release:
 
@@ -29,6 +31,8 @@ Before publishing a coordinated stack release:
 3. Provider-free product smoke must pass.
 4. Local LLM smoke is required when provider or product-shell behavior touches local model execution.
 5. Python versions outside the declared support range must not resolve the release.
+6. Corpus-aware validation must pass on at least one Tier 1 corpus with `--release-gate-mode` and a minimum of 100 forecasts across 10 iterations.
+7. Performance budgets must pass for `provider-free-smoke` scenario with default or stricter budgets.
 
 ## Recommended release order
 
@@ -45,6 +49,64 @@ Repository automation should prefer `uv` for Python dependency installation and 
 
 If a workflow uses direct `pip`, the step name or comment must make that purpose clear.
 
+## Release-gated command claims
+
+Top-level newcomer/operator docs must stay behind the published package surface.
+
+- `xrtm/docs/release-command-contract.json` is the source of truth for release-safe command claims.
+- README/getting-started/operator/site pages must pass the automated release-claim checks against that contract.
+- Command-surface additions on `main` stay out of those pages until the matching package release is published, the contract version is updated, and released-stack smoke passes against that version.
+
+## Validation and performance evidence
+
+Release candidates must include validation and performance evidence demonstrating regression-free behavior:
+
+### Corpus-aware validation
+
+Run the validation harness with release-gate mode:
+
+```bash
+xrtm validate run \
+  --corpus-id xrtm-real-binary-v1 \
+  --release-gate-mode \
+  --provider mock \
+  --limit 100 \
+  --iterations 10 \
+  --output-dir .cache/validation
+```
+
+The validation artifact must show:
+- Tier 1 corpus usage (`release_gate_approved: true`)
+- Successful completion of all iterations
+- Forecast correctness (Brier scores within expected ranges)
+- No schema validation errors
+
+Approved Tier 1 corpora include `xrtm-real-binary-v1` (seed corpus) and `forecastbench` (preferred for comprehensive coverage). See `xrtm/docs/operator-runbook.md` for corpus tier classification.
+
+### Performance budget compliance
+
+Run the performance harness with budget enforcement:
+
+```bash
+xrtm perf run \
+  --scenario provider-free-smoke \
+  --iterations 5 \
+  --limit 10 \
+  --fail-on-budget \
+  --output performance.json
+```
+
+The performance artifact must show:
+- Mean iteration duration within default or stricter budgets
+- P95 iteration duration within default or stricter budgets
+- Budget status `passed` or better
+
+Default budgets:
+- `provider-free-smoke` (limit=10): mean ≤50ms, p95 ≤100ms
+- `provider-free-scale` (limit=100): mean ≤500ms, p95 ≤1000ms
+
+Record validation and performance artifacts with release notes or attach to release PRs for evidence traceability.
+
 ## Release blocker examples
 
 Do not publish if any of these are true:
@@ -56,4 +118,7 @@ Do not publish if any of these are true:
 - Product smoke fails in provider-free mode.
 - Local LLM smoke fails after bounded retry when the change affects provider/local-model behavior.
 - Documentation claims support for versions, commands, or provider behavior that is not validated.
+- Corpus-aware validation fails or uses a non-release-gate-approved corpus (Tier 2/3).
+- Performance budgets are exceeded for the corresponding scenario.
+- Validation or performance evidence is missing or incomplete.
 
