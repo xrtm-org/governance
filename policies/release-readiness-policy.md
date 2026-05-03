@@ -57,6 +57,17 @@ Top-level newcomer/operator docs must stay behind the published package surface.
 - README/getting-started/operator/site pages must pass the automated release-claim checks against that contract.
 - Command-surface additions on `main` stay out of those pages until the matching package release is published, the contract version is updated, and released-stack smoke passes against that version.
 
+## Feature graduation discipline
+
+Use `policies/feature-status-and-graduation-policy.md` whenever a feature exists in source or branch docs but is not yet part of the published release surface.
+
+Before a branch-only convenience can move into release-pinned docs or release command contracts:
+
+1. The owning repo must record it as `next-release`, `advanced/experimental`, or `redesign-required` with explicit graduation criteria.
+2. Release-pinned docs must stay on the currently published package surface until the package is actually published.
+3. Promotion requires the contract/docs update and released-stack smoke in the same coordinated release move.
+4. Features marked `redesign-required` must not be presented as imminent release candidates until the public contract is settled.
+
 ## Validation and performance evidence
 
 Release candidates must include validation and performance evidence demonstrating regression-free behavior:

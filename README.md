@@ -10,6 +10,7 @@ We separate our "Standards" from our "Implementation" to ensure consistency acro
 * **Technical Standards:** To understand the data structures required for interoperability, see the [schemas/](schemas/) directory.
 * **PR Acceptance:** To decide whether to accept, modify, supersede, reject, or defer pull requests, use [policies/pr-acceptance-policy.md](policies/pr-acceptance-policy.md).
 * **Release Readiness:** For release publication gates including corpus-aware validation and performance budgets, see [policies/release-readiness-policy.md](policies/release-readiness-policy.md).
+* **Feature Status & Graduation:** For released vs next-release vs advanced vs redesign-required labeling, see [policies/feature-status-and-graduation-policy.md](policies/feature-status-and-graduation-policy.md).
 * **Product Story & Structure:** For canonical rerun rules, macro-reorg triggers, and the XRTM story hierarchy, see [policies/product-story-and-architecture-guardrails.md](policies/product-story-and-architecture-guardrails.md).
 
 ## Core Standards
