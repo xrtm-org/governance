@@ -41,6 +41,8 @@ When building a new tool or agent for xrtm:
 3. **Propose Changes:** To change a standard (e.g., adding a field to the Forecast Object), submit a Pull Request to this repository first.
 4. **Review PRs Carefully:** Do not merge every open PR. Apply the [PR Acceptance Policy](policies/pr-acceptance-policy.md) and record whether a PR is accepted as-is, accepted with changes, superseded, rejected, or deferred.
 
+For the GitHub-first contributor flow, start with [CONTRIBUTING.md](CONTRIBUTING.md). It summarizes local validation, repo-role boundaries, and when downstream repos need coordinated follow-up.
+
 ## Maintainer quick rules
 
 1. Keep release-pinned docs and quickstarts on the currently published package surface only. Branch-only value belongs in next-release or advanced docs with explicit labels.
