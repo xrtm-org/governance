@@ -26,6 +26,23 @@ Rules:
 2. Internal-only refactors can ship independently if they do not change a stable surface.
 3. If maintainers disagree about whether a surface is stable, treat it as stable until governance or repository docs say otherwise.
 
+## Published-surface change management
+
+These changes need extra discipline even when they look "small":
+
+- install snippets, version floors, and dependency expectations
+- documented CLI or API examples meant for the current released path
+- README hero flows, getting-started pages, operator runbooks, and homepage proof blocks
+- run-artifact shapes, exported file semantics, and other user-consumed output contracts
+
+When a change touches one of those surfaces:
+
+1. Name the exact owning repo and stable surface in the PR or coordination record.
+2. Decide explicitly whether the change is `released` now or still `next-release` / `advanced/experimental` / `redesign-required`.
+3. Land the authoritative source-of-truth update first (`governance` or the owning product/package repo), then mirror it downstream.
+4. Record the exact downstream validation needed for the next consumer in the chain, especially `forecast -> xrtm` and `xrtm -> xrtm.org`.
+5. Keep the default released docs on the already-published behavior until the corresponding package and contract move is real.
+
 ## Dependency expectations in practice
 
 For the current core-repo coordination path, the dependency chain is:

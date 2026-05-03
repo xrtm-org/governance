@@ -25,7 +25,9 @@ For every `next-release`, `advanced/experimental`, or `redesign-required` item, 
 2. owning repo and audience
 3. current status label
 4. why that label is correct right now
-5. the exact evidence needed to promote it, keep it advanced, or redesign it
+5. target release train, release family, or explicit "not on the current release train" decision
+6. the exact evidence needed to promote it, keep it advanced, or redesign it
+7. which release-pinned docs, contracts, examples, or downstream repos would need to move together at promotion time
 
 For top-level `xrtm` CLI conveniences, keep that record in `xrtm/docs/next-release-feature-track.md`. Public-facing summaries may mirror it on `xrtm.org`, but the owning repo remains authoritative for command-level details.
 
@@ -46,6 +48,13 @@ Before a `next-release` item becomes `released`, the owning repo must complete a
 3. Update release-pinned docs only in the same change set that updates the published package version or release contract.
 4. Update `xrtm/docs/release-command-contract.json` (or the equivalent release-safe contract) when top-level command claims change.
 5. Record the status move in the owning repo's next-release track and remove or downgrade stale roadmap wording if needed.
+
+## Promotion and fallback rules
+
+1. `next-release` should mean a concrete near-term release train, not "maybe someday."
+2. If the required validation, compatibility work, or documentation move is not ready when a release branch or release PR is cut, keep the feature unreleased or downgrade it. Do not partially promote the docs first.
+3. Promotion PRs must update the owning repo's authoritative feature record before downstream mirrors such as `xrtm.org`.
+4. When a promotion changes schemas, install/version expectations, package boundaries, or default workflows across repos, follow the cross-repo coordination order from `policies/cross-repo-compatibility-policy.md`.
 
 ## Advanced and redesign paths
 

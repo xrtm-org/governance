@@ -47,6 +47,24 @@ Every accepted or superseding PR must pass its package gate.
 - `uv run pytest tests` for `data`, `eval`, and `train`.
 - `uv run pytest tests/unit` plus relevant integration or local-skipped tests for `forecast`.
 
+### Product and site docs
+
+- `xrtm`: `python scripts/check_release_claims.py --repo-root . --contract docs/release-command-contract.json --scope xrtm`
+- `xrtm.org`: `npm run release:check`
+- `xrtm.org`: `npm run typecheck`
+- `xrtm.org`: `npm run audit:policy`
+- `xrtm.org`: `npm run build`
+
+## Merge blockers for published surfaces
+
+Do not merge if any of these are true:
+
+- Release-pinned docs or README quickstarts claim commands, APIs, versions, or behavior that are not yet published.
+- A branch-only or intentionally unreleased feature lacks an explicit status record in its owning repo.
+- A stable schema/API/CLI/run-artifact/install surface changed without compatibility notes, tests, or an explicit migration plan.
+- A coordinated change relies on same-name branches, undocumented alias branches, or unstated sibling refs as the proof of compatibility.
+- Site/docs content changes the public story before the owning governance or product repo records the accepted source-of-truth change.
+
 ### Cross-repo gates
 
 Before release-candidate approval, run the workspace validation matrix:

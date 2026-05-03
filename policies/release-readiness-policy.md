@@ -57,6 +57,22 @@ Top-level newcomer/operator docs must stay behind the published package surface.
 - README/getting-started/operator/site pages must pass the automated release-claim checks against that contract.
 - Command-surface additions on `main` stay out of those pages until the matching package release is published, the contract version is updated, and released-stack smoke passes against that version.
 
+## Release-pinned documentation policy
+
+Treat these as release-pinned surfaces unless a repo explicitly labels them otherwise:
+
+- README hero flows and install snippets
+- getting-started, newcomer, and operator quickstarts
+- homepage proof blocks and default workflow pages
+- versioned API/CLI examples that claim current published behavior
+
+Rules:
+
+1. Release-pinned pages may describe only commands, APIs, versions, and behavior that already exist in published artifacts.
+2. If a useful feature is real in source but not published yet, move the explanation to the owning repo's next-release track or clearly labeled advanced docs instead of mixing it into the default released path.
+3. If a page would become misleading without an unreleased feature, split the page or defer the edit; do not "pre-announce" the feature inside release-pinned instructions.
+4. Promotion into release-pinned docs requires the docs update, release contract update, published version/reference update, and released-artifact smoke evidence in the same coordinated release move.
+
 ## Feature graduation discipline
 
 Use `policies/feature-status-and-graduation-policy.md` whenever a feature exists in source or branch docs but is not yet part of the published release surface.
@@ -132,4 +148,3 @@ Do not publish if any of these are true:
 - Corpus-aware validation fails or uses a non-release-gate-approved corpus (Tier 2/3).
 - Performance budgets are exceeded for the corresponding scenario.
 - Validation or performance evidence is missing or incomplete.
-
