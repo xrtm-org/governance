@@ -33,5 +33,6 @@ identity: THE LAW
 ### 3. [PROACTIVE GUARDRAILS] (Behavior)
 - **ON WAKE**: Check for CI failures and uncommitted changes. Run `uv run ruff check .` to ensure compliance.
 - **ON PR**: Read `policies/pr-acceptance-policy.md` before accepting, superseding, rejecting, or deferring PRs. For release work, also read `policies/release-readiness-policy.md`. Validate that no breaking schema changes are introduced. Ensure `AGENTS.md` and rule files remain consistent.
+- **ON CROSS-REPO CHANGE**: Read `policies/cross-repo-compatibility-policy.md` before changing a stable contract, cross-repo CI behavior, release sequencing, or site-facing compatibility guidance. Do not treat same-name branches or branch aliases as durable compatibility proof.
 - **ON FAILURE**: Auto-fix formatting (`ruff format`) and type errors where deterministic. If a schema violation is detected, HALT and request user intervention.
 ---

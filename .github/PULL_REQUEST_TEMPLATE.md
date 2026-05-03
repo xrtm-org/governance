@@ -18,12 +18,19 @@ Please describe validation performed:
 - [ ] Documentation changes reviewed for accuracy and clarity
 - [ ] Breaking changes include migration guide
 
+## Public-surface impact
+
+- Affected repos/surfaces: <!-- governance schema/policy, xrtm docs/CLI, forecast runtime/API, xrtm.org presentation, or N/A -->
+- Release-pinned docs impact: <!-- yes/no + which released pages or contracts must stay aligned -->
+- Coordination record: <!-- linked issue / PR family / release note, or N/A -->
+
 ## Checklist:
 - [ ] I have performed a self-review of my own changes
 - [ ] Changes follow existing governance documentation style and conventions
 - [ ] I have verified links and references are correct
 - [ ] Schema changes preserve backward compatibility or include explicit migration path
 - [ ] Policy changes align with existing XRTM philosophy and goals
+- [ ] When this change affects published surfaces, downstream repo docs/templates/policies are updated or explicitly tracked
 
 ---
 
