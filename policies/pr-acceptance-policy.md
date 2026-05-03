@@ -47,6 +47,42 @@ Every accepted or superseding PR must pass its package gate.
 - `uv run pytest tests` for `data`, `eval`, and `train`.
 - `uv run pytest tests/unit` plus relevant integration or local-skipped tests for `forecast`.
 
+### Corpus-aware validation (for forecast/eval/train changes)
+
+PRs that modify forecasting, evaluation, or training logic must include corpus-aware validation evidence:
+
+```bash
+xrtm validate run \
+  --corpus-id xrtm-real-binary-v1 \
+  --provider mock \
+  --limit 50 \
+  --iterations 5
+```
+
+The validation must:
+- Use a Tier 1 corpus when the PR is release-candidate quality
+- Complete without schema validation errors
+- Show comparable or improved Brier scores relative to baseline
+
+### Performance evidence (for performance-sensitive changes)
+
+PRs that modify pipeline execution, batch processing, or provider integration must include performance evidence:
+
+```bash
+xrtm perf run \
+  --scenario provider-free-smoke \
+  --iterations 3 \
+  --limit 10 \
+  --output pr-performance.json
+```
+
+The performance run must:
+- Complete successfully with all iterations
+- Meet or beat default budgets for the scenario
+- Show no significant regression compared to baseline (main branch)
+
+Record validation and performance artifacts in the PR description or attach as PR comments for reviewer evidence.
+
 ### Cross-repo gates
 
 Before release-candidate approval, run the workspace validation matrix:
@@ -83,6 +119,8 @@ Do not release if any of these are true:
 - `xrtm.org` has high or critical npm audit findings.
 - Public schema/API changes are undocumented or lack compatibility tests.
 - Dirty or unreviewed local changes are included in release artifacts.
+- Corpus-aware validation fails or uses non-release-gate-approved corpora for release candidates.
+- Performance budgets are exceeded without documented justification.
 
 ## Merge and release order
 
@@ -110,7 +148,7 @@ Release packages in dependency order:
 
 These should remain visible but do not block release by themselves:
 
-- Moderate-only `xrtm.org` audit findings in upstream Docusaurus development-server chains, as long as high and critical findings remain zero.
+- Moderate-only `xrtm.org` audit findings in upstream Docusaurus development-server chains, as long as high and critical findings remain zero, `xrtm.org` keeps localhost-only default dev-server binding, and the repo README records the current dependency chain, owning maintainers, and re-review triggers.
 - Larger live-source integrations beyond the deterministic offline real-question corpus.
 - Broader schema canonicalization beyond compatibility shims.
 - Low-value or risky micro-optimization PRs that lack clear benchmark or correctness value.
