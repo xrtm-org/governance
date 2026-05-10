@@ -22,7 +22,27 @@ Dependencies flow **downwards**. A component may import from layers below it, bu
 * **Why:** "Backtesting" and "Training" are modes of the same simulation loop.
 * **Violation:** Placing a `backtest.py` script inside `xrtm-forecast` is forbidden, as it couples the runtime to historical data loading.
 
-## 3. Namespace Package Structure
+## 3. Benchmark Capability Placement
+
+Benchmarking is an **ecosystem capability**, not a monolith inside the product
+shell.
+
+| Layer | Benchmark responsibility |
+| :--- | :--- |
+| `xrtm-data` | Corpus registry, provenance, license metadata, cache/import workflows, canonical question records |
+| `xrtm-eval` | Scoring, calibration, comparison math, scorecard primitives |
+| `xrtm-train` | Offline sweeps, replay loops, benchmark orchestration, live competition execution |
+| `xrtm` | Thin user-facing inspection, reporting, and export surfaces only |
+
+**Rule:** benchmark features must be implemented at the lowest layer that can
+own them cleanly. In particular:
+
+- corpus admissibility and provenance checks belong in `xrtm-data`
+- leaderboard and benchmark math belong in `xrtm-eval`
+- repeated benchmark execution belongs in `xrtm-train`
+- `xrtm` may surface benchmark results, but it must not become the benchmark engine
+
+## 4. Namespace Package Structure
 
 All repositories must adhere to the **Implicit Namespace Package** layout to allow unified importing (`import xrtm.forecast`, `import xrtm.data`).
 
