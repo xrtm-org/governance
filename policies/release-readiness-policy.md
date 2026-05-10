@@ -29,10 +29,12 @@ Before publishing a coordinated stack release:
 1. Lower-layer packages must be released and visible on the package index before dependent packages raise their minimum versions.
 2. The top-level `xrtm` package must pass a stack compatibility smoke using the released package set.
 3. Provider-free product smoke must pass.
-4. Local LLM smoke is required when provider or product-shell behavior touches local model execution.
-5. Python versions outside the declared support range must not resolve the release.
-6. Corpus-aware validation must pass on at least one Tier 1 corpus with `--release-gate-mode` and a minimum of 100 forecasts across 10 iterations.
-7. Performance budgets must pass for `provider-free-smoke` scenario with default or stricter budgets.
+4. The disposable Docker clean-room provider-free acceptance lane must pass from wheelhouse artifacts before publish, and must pass again from PyPI artifacts before the release record is considered complete.
+5. Local LLM smoke is required when provider or product-shell behavior touches local model execution.
+6. Local-LLM clean-room acceptance is additionally required for those local-model changes when a compatible runner/model setup is available; otherwise the release record must explicitly note why the local-LLM lane remains a manual or deferred follow-up.
+7. Python versions outside the declared support range must not resolve the release.
+8. Corpus-aware validation must pass on at least one Tier 1 corpus with `--release-gate-mode` and a minimum of 100 forecasts across 10 iterations.
+9. Performance budgets must pass for `provider-free-smoke` scenario with default or stricter budgets.
 
 ## Recommended release order
 
@@ -48,6 +50,23 @@ Before publishing a coordinated stack release:
 Repository automation should prefer `uv` for Python dependency installation and virtual environment operations. Direct `pip` use is allowed only when a workflow is explicitly testing end-user `pip install` behavior or package-index resolution.
 
 If a workflow uses direct `pip`, the step name or comment must make that purpose clear.
+
+The workspace clean-room lane is:
+
+- `./workspace.sh docker-provider-free-acceptance --artifact-source wheelhouse`
+- `./workspace.sh docker-provider-free-acceptance --artifact-source pypi`
+- `./workspace.sh docker-local-llm-acceptance --artifact-source wheelhouse`
+
+The provider-free lane builds a disposable `docker run --rm` validation container, installs only from wheelhouse or PyPI artifacts, mounts the checkout read-only for release-pinned docs/examples, and persists logs plus run artifacts under `acceptance-studies/docker-provider-free/`.
+
+The local-LLM acceptance lane uses Docker Compose to keep the acceptance runner disposable while a separate llama.cpp service container owns model state for the bounded real-model smoke. It reads model weights from `XRTM_LOCAL_LLM_MODEL_DIR`/`XRTM_LOCAL_LLM_MODEL` (or explicit CLI overrides) and persists logs plus run artifacts under `acceptance-studies/docker-local-llm/`.
+
+Release-readiness evidence should record:
+
+- the exact lane command or CI workflow run
+- the artifact source (`wheelhouse` for pre-publish candidates, `pypi` for published verification)
+- the persisted `summary.json` path or uploaded artifact bundle
+- any local-LLM skip/defer note when provider/local-model behavior changed but the bounded lane could not run on available infrastructure
 
 ## Release-gated command claims
 
@@ -143,7 +162,9 @@ Do not publish if any of these are true:
 - A dependent package version is not yet visible on the package index.
 - A release resolves on an unsupported Python version.
 - Product smoke fails in provider-free mode.
+- The disposable Docker clean-room provider-free acceptance lane fails.
 - Local LLM smoke fails after bounded retry when the change affects provider/local-model behavior.
+- The disposable Docker clean-room local-LLM acceptance lane fails after bounded retry, or the release record omits the required skip/defer note.
 - Documentation claims support for versions, commands, or provider behavior that is not validated.
 - Corpus-aware validation fails or uses a non-release-gate-approved corpus (Tier 2/3).
 - Performance budgets are exceeded for the corresponding scenario.
