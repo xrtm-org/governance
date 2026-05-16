@@ -7,6 +7,7 @@ The repository split remains in place for now. Coordination must therefore happe
 Use this policy together with:
 
 - `policies/pr-acceptance-policy.md` for merge decisions
+- `policies/stack-versioning-policy.md` for anchor-version ownership, release-train meaning, and docs/contract coordination rules
 - `policies/release-readiness-policy.md` for release publication gates
 
 ## Stable contract surfaces vs. internal surfaces

@@ -2,7 +2,7 @@
 
 This policy keeps useful branch-only features from living in limbo. It defines how XRTM labels unreleased-but-desired work, where that work is documented, and what must happen before it graduates into release-pinned docs or published package claims.
 
-For release publication gates, use this policy together with `policies/release-readiness-policy.md`.
+For release publication gates, use this policy together with `policies/release-readiness-policy.md`. For what a release train means and why train membership does not require matching package versions, also use `policies/stack-versioning-policy.md`.
 
 ## Status labels
 

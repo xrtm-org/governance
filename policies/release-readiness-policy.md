@@ -2,6 +2,8 @@
 
 This policy defines the minimum gates for coordinated XRTM releases. It complements the PR acceptance policy: PR review decides whether a change is worth merging; release readiness decides whether the merged stack is safe to publish.
 
+For which repo version anchors the product release, why support-package versions may differ, and what a release train actually means, also use `policies/stack-versioning-policy.md`.
+
 ## Supported runtime boundary
 
 All released Python packages must declare only the Python versions that are validated by CI and release smoke tests.
