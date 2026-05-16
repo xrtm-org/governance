@@ -2,7 +2,7 @@
 
 This policy defines the minimum gates for coordinated XRTM releases. It complements the PR acceptance policy: PR review decides whether a change is worth merging; release readiness decides whether the merged stack is safe to publish.
 
-For which repo version anchors the product release, why support-package versions may differ, and what a release train actually means, also use `policies/stack-versioning-policy.md`.
+For which repo version anchors the product release, why support-package versions may differ, and what a release train actually means, also use `policies/stack-versioning-policy.md`. For release claims that say users may choose CLI or WebUI for the same task, also use `policies/interface-parity-and-claim-ownership-policy.md`.
 
 ## Supported runtime boundary
 
