@@ -13,6 +13,7 @@ We separate our "Standards" from our "Implementation" to ensure consistency acro
 * **Stack Versioning:** For why package versions differ, what `xrtm` anchors, what release trains mean, and when package/docs/contracts/site updates must move together, see [policies/stack-versioning-policy.md](policies/stack-versioning-policy.md).
 * **Cross-Repo Compatibility:** For stable-surface changes, linked PR families, downstream validation, and published-surface coordination, see [policies/cross-repo-compatibility-policy.md](policies/cross-repo-compatibility-policy.md).
 * **Feature Status & Graduation:** For released vs next-release vs advanced vs redesign-required labeling, see [policies/feature-status-and-graduation-policy.md](policies/feature-status-and-graduation-policy.md).
+* **Interface Parity & Claims:** For when CLI/WebUI/TUI/API capabilities can be called parity-ready, CLI-only, WebUI-only, advanced, or redesign-required, see [policies/interface-parity-and-claim-ownership-policy.md](policies/interface-parity-and-claim-ownership-policy.md).
 * **Product Story & Structure:** For canonical rerun rules, macro-reorg triggers, and the XRTM story hierarchy, see [policies/product-story-and-architecture-guardrails.md](policies/product-story-and-architecture-guardrails.md).
 
 ## Core Standards
@@ -51,6 +52,7 @@ For the GitHub-first contributor flow, start with [CONTRIBUTING.md](CONTRIBUTING
 3. Treat documented APIs, schemas, CLI commands, run artifacts, install/version expectations, and release-pinned docs as stable published surfaces unless governance says otherwise.
 4. Merge only after repo-local gates pass; release only after the release-readiness gates and released-artifact smoke pass with recorded evidence.
 5. Treat the published `xrtm` version as the product anchor. Support packages may version independently; release trains coordinate validated version sets rather than forcing shared version numbers.
+6. Claim CLI/WebUI parity only when the owning repo's parity matrix marks the capability `parity-ready` and the required evidence exists.
 
 ## Triage and Review Process
 To ensure consistent and reproducible decisions for PRs and issues:
