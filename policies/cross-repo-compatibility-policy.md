@@ -43,6 +43,7 @@ When a change touches one of those surfaces:
 3. Land the authoritative source-of-truth update first (`governance` or the owning product/package repo), then mirror it downstream.
 4. Record the exact downstream validation needed for the next consumer in the chain, especially `forecast -> xrtm` and `xrtm -> xrtm.org`.
 5. Keep the default released docs on the already-published behavior until the corresponding package and contract move is real.
+6. When terminology changes land, document the canonical term, the accepted alias, and the removal/versioning window in the owning repo before downstream repos adopt the new wording.
 
 ## Dependency expectations in practice
 

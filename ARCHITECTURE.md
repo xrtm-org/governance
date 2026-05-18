@@ -48,3 +48,16 @@ All repositories must adhere to the **Implicit Namespace Package** layout to all
 
 * **Requirement:** The folder `src/xrtm/` must **NEVER** contain an `__init__.py` file.
 * **Requirement:** Each sub-package (e.g., `src/xrtm/forecast/`) **MUST** contain an `__init__.py` file.
+
+## 5. Terminology discipline
+
+Across the contract-layer repositories, prefer the layered vocabulary:
+
+- **forecast request / forecast result** for the primary data objects
+- **reasoning trace** and **execution trace** for structured trace surfaces
+- **workflow** and **run** for orchestration semantics
+- **forecast path** and **evaluation path** for labeled reasoning or scoring routes
+
+Avoid plain **graph** unless it is qualified (for example, `causal_graph` in the
+versioned Forecast Object schema or a concrete engine type such as
+`BaseGraphState`).
