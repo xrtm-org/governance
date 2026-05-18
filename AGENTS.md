@@ -28,6 +28,7 @@ identity: THE LAW
     - **Stage** (not Node) for graph steps.
     - **Agent** (Reasoning/LLM) vs **Stage** (Functional).
     - **Skill** (Capabilities) vs **Tool** (Functions).
+    - Prefer **forecast request / forecast result**, **reasoning trace**, **execution trace**, **workflow**, **run**, and qualified **causal graph** over plain **graph**.
 - **Domain Agnosticism**: No financial/gambling terms (e.g., use "Subject" not "Market", "Forecast" not "Bet").
 
 ### 3. [PROACTIVE GUARDRAILS] (Behavior)

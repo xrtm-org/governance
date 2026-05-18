@@ -24,7 +24,7 @@ All inference engines and evaluation tools must exchange data using the **Foreca
 * **Definition:** [schemas/forecast_object_v1.1.json](schemas/forecast_object_v1.1.json)
 * **Previous Version:** [schemas/forecast_object_v1.json](schemas/forecast_object_v1.json)
 * **Compatibility Policy:** [schemas/compatibility-policy.md](schemas/compatibility-policy.md)
-* **Key Features:** Enforces strict fields for `snapshot_time` (Zero Leakage) and `reasoning_trace` (Causal Graphs). v1.1 adds optional parametric `distribution` support (Beta, Gaussian Bounded) for epistemic uncertainty; deprecated `confidence_interval` remains compatible.
+* **Key Features:** Establishes the shared forecast request / forecast result vocabulary, enforces strict `snapshot_time` and `reasoning_trace` requirements, and reserves compatibility guidance for legacy aliases such as `ForecastQuestion`, `ForecastOutput`, `question_id`, `structural_trace`, and `reporting_lane`. v1.1 adds optional parametric `distribution` support (Beta, Gaussian Bounded) for epistemic uncertainty; deprecated `confidence_interval` remains compatible.
 
 ## The Ecosystem
 This governance repository defines the standards for the following software components:
