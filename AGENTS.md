@@ -25,10 +25,10 @@ identity: THE LAW
 - **Tone**: Serious, "Whitepaper" style. No emojis (except status tables). No "marketing" bolding.
 - **Structure**: Descriptive headers. Installation/Quickstart first.
 - **Strict Taxonomy**:
-    - **Stage** (not Node) for graph steps.
-    - **Agent** (Reasoning/LLM) vs **Stage** (Functional).
-    - **Skill** (Capabilities) vs **Tool** (Functions).
-    - Prefer **forecast request / forecast result**, **reasoning trace**, **execution trace**, **workflow**, **run**, and qualified **causal graph** over plain **graph**.
+ - **Stage** (not Node) for graph steps.
+ - **Agent** (Reasoning/LLM) vs **Stage** (Functional).
+ - **Skill** (Capabilities) vs **Tool** (Functions).
+ - Prefer **forecast request / forecast result**, **reasoning trace**, **execution trace**, **workflow**, **run**, and qualified **causal graph** over plain **graph**.
 - **Domain Agnosticism**: No financial/gambling terms (e.g., use "Subject" not "Market", "Forecast" not "Bet").
 
 ### 3. [PROACTIVE GUARDRAILS] (Behavior)

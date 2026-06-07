@@ -1,6 +1,6 @@
 # Interface Parity and Claim Ownership Policy
 
-This policy defines how XRTM treats CLI, WebUI, TUI, and API surfaces when a
+This policy defines how XRTM treats CLI, TUI, and API surfaces when a
 capability is presented as part of the product. Use it with the release
 readiness, feature graduation, cross-repo compatibility, and stack versioning
 policies.
@@ -15,9 +15,9 @@ interface status:
 
 | Status | Meaning | Allowed claims |
 | --- | --- | --- |
-| `parity-ready` | CLI and WebUI expose the same released capability with interface-appropriate controls and shared service semantics. | Release-pinned docs may say users can choose either CLI or WebUI for that task. |
-| `cli-only-accepted` | The capability is intentionally terminal-only for now, with a documented reason and graduation condition. | Release-pinned docs may describe the CLI path, but must not imply WebUI parity. |
-| `webui-only-accepted` | The capability is intentionally browser-only for now, with a documented reason and graduation condition. | Release-pinned docs may describe the WebUI path, but must not imply CLI parity. |
+| `parity-ready` | CLI and expose the same released capability with interface-appropriate controls and shared service semantics. | Release-pinned docs may say users can choose either CLI or for that task. |
+| `cli-only-accepted` | The capability is intentionally terminal-only for now, with a documented reason and graduation condition. | Release-pinned docs may describe the CLI path, but must not imply parity. |
+| `webui-only-accepted` | The capability is intentionally browser-only for now, with a documented reason and graduation condition. | Release-pinned docs may describe the path, but must not imply CLI parity. |
 | `interface-entrypoint` | The command or route launches, inspects, or switches interfaces rather than representing a product capability itself. | Docs may explain the entrypoint without requiring a mirror entrypoint in another interface. |
 | `advanced/experimental` | The capability exists but is not part of the default released product path. | Advanced docs only, with explicit labeling and no default-path parity claim. |
 | `redesign-required` | The current behavior works technically but should not become the public contract. | Keep out of release-pinned docs and parity claims until the contract is redesigned. |
@@ -26,17 +26,17 @@ interface status:
 
 1. `governance` owns this policy and the shared vocabulary.
 2. `xrtm` owns the implementation-level parity matrix for product-shell
-   commands, WebUI routes, product services, and release gates.
+ commands, routes, product services, and release gates.
 3. `xrtm.org` mirrors released truth after `xrtm` has implementation evidence
-   and an updated release contract.
-4. Support packages own their package APIs and metadata. They do not need WebUI
-   parity records unless `xrtm` exposes their behavior as a top-level product
-   task.
+ and an updated release contract.
+4. Support packages own their package APIs and metadata. They do not need 
+ parity records unless `xrtm` exposes their behavior as a top-level product
+ task.
 
 The implementation-level matrix must identify:
 
 1. the CLI command or command family
-2. the WebUI route, API route, or module that exposes the same capability
+2. the route, API route, or module that exposes the same capability
 3. the current interface status
 4. the persona or user job served
 5. the shared product service that owns behavior
@@ -45,8 +45,8 @@ The implementation-level matrix must identify:
 
 ## Shared service rule
 
-Parity is not satisfied by copying CLI behavior into a separate WebUI code path.
-Mutating or release-critical WebUI actions must call the same product service
+Parity is not satisfied by copying CLI behavior into a separate code path.
+Mutating or release-critical actions must call the same product service
 semantics used by CLI commands, or a documented shared adapter that has parity
 tests against the CLI behavior.
 
@@ -62,26 +62,26 @@ Examples of release-critical actions include:
 
 ## Claim rules
 
-1. Release-pinned docs may claim CLI/WebUI choice only for `parity-ready`
-   capabilities.
-2. If a capability is CLI-only, WebUI-only, advanced, or redesign-required, the
-   page must say so or keep it out of the default released path.
+1. Release-pinned docs may claim CLI/ choice only for `parity-ready`
+ capabilities.
+2. If a capability is CLI-only, -only, advanced, or redesign-required, the
+ page must say so or keep it out of the default released path.
 3. Public site pages must not introduce parity claims before the product repo
-   has the matrix update, implementation, contract update where needed, and
-   release evidence.
+ has the matrix update, implementation, contract update where needed, and
+ release evidence.
 4. A parity claim is a stable product-surface claim. If it changes user-visible
-   behavior, apply the cross-repo compatibility policy and coordinate docs,
-   contracts, and site updates.
+ behavior, apply the cross-repo compatibility policy and coordinate docs,
+ contracts, and site updates.
 
 ## Gate requirements
 
 Gate 1 for every parity PR must include the repo-local checks plus any changed
 service-level parity tests. For `xrtm`, this means the normal lint, type, test,
-WebUI build, package, installed-wheel, and command-claim checks appropriate to
+ build, package, installed-wheel, and command-claim checks appropriate to
 the touched surface.
 
 Gate 2 is required before releasing a user-facing parity expansion in `xrtm`.
-It must validate the WebUI-only path from a fresh install for the released task,
+It must validate the -only path from a fresh install for the released task,
 not just prove the CLI command still works. If the released claim depends on a
 real OpenAI-compatible endpoint or coding-agent CLI contract, Gate 2 must include
 the corresponding supported runtime profile under the release-readiness policy.
@@ -93,11 +93,11 @@ promise depends on that advanced path.
 ## Graduation process
 
 1. Add or update the implementation-level parity matrix before broadening public
-   claims.
+ claims.
 2. Implement missing service/API/frontend behavior behind shared product
-   services.
-3. Add service-level parity tests and WebUI route/API smoke for the changed
-   capability.
+ services.
+3. Add service-level parity tests and route/API smoke for the changed
+ capability.
 4. Promote docs and release-command contracts only with release evidence.
 5. Mirror the released claim on `xrtm.org` last.
 

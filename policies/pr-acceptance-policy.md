@@ -81,13 +81,13 @@ Before release-candidate approval, run the workspace validation matrix:
 
 Local GPU gates are manual but required before release:
 
-- `./workspace.sh local-llm-start`
-- `./workspace.sh check-local-llm`
+- `./workspace.sh -start`
+- `./workspace.sh check-`
 - `./workspace.sh check-offline-e2e`
-- `./workspace.sh real-e2e-local-llm`
-- `./workspace.sh bench-real --provider local-llm --limit 2 --iterations 1`
-- `./workspace.sh stress-local-llm`
-- `./workspace.sh local-llm-stop`
+- `./workspace.sh real-e2e-`
+- `./workspace.sh bench-real --provider --limit 2 --iterations 1`
+- `./workspace.sh stress-`
+- `./workspace.sh -stop`
 
 ## Release blockers
 

@@ -121,10 +121,10 @@ Policy:
 - Do not design CI around "current branch name exists in the sibling repo".
 - Do not require hidden branch aliases as the normal way to prove compatibility.
 - If a temporary branch alias is unavoidable before a better explicit-ref mechanism exists, it must be:
-  - documented in every affected PR,
-  - limited to short-lived coordination work,
-  - replaced by an explicit ref or merged upstream change before release, and
-  - removed once the coordinated PR family is complete.
+ - documented in every affected PR,
+ - limited to short-lived coordination work,
+ - replaced by an explicit ref or merged upstream change before release, and
+ - removed once the coordinated PR family is complete.
 
 No release decision may rely solely on a same-branch assumption or undocumented alias branch.
 
