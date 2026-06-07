@@ -92,6 +92,6 @@ Reassess this policy if:
 
 ---
 
-**Policy Version**: 1.0  
-**Date**: May 2026  
+**Policy Version**: 1.0 
+**Date**: May 2026 
 **Approved By**: Architecture Review Group

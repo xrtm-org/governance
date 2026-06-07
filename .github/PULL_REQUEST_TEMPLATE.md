@@ -4,19 +4,19 @@ Please include a summary of the change and which issue is fixed. Please also inc
 Fixes # (issue)
 
 ## Type of change
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] Schema or policy change (affects organization-wide standards)
-- [ ] This change requires a documentation update
+-  Bug fix (non-breaking change which fixes an issue)
+-  New feature (non-breaking change which adds functionality)
+-  Breaking change (fix or feature that would cause existing functionality to not work as expected)
+-  Schema or policy change (affects organization-wide standards)
+-  This change requires a documentation update
 
 ## How Has This Been Tested?
 Please describe validation performed:
 
-- [ ] Schema changes validated against existing implementations
-- [ ] Policy changes reviewed by governance maintainers
-- [ ] Documentation changes reviewed for accuracy and clarity
-- [ ] Breaking changes include migration guide
+-  Schema changes validated against existing implementations
+-  Policy changes reviewed by governance maintainers
+-  Documentation changes reviewed for accuracy and clarity
+-  Breaking changes include migration guide
 
 ## Public-surface impact
 
@@ -25,12 +25,12 @@ Please describe validation performed:
 - Coordination record: <!-- linked issue / PR family / release note, or N/A -->
 
 ## Checklist:
-- [ ] I have performed a self-review of my own changes
-- [ ] Changes follow existing governance documentation style and conventions
-- [ ] I have verified links and references are correct
-- [ ] Schema changes preserve backward compatibility or include explicit migration path
-- [ ] Policy changes align with existing XRTM philosophy and goals
-- [ ] When this change affects published surfaces, downstream repo docs/templates/policies are updated or explicitly tracked
+-  I have performed a self-review of my own changes
+-  Changes follow existing governance documentation style and conventions
+-  I have verified links and references are correct
+-  Schema changes preserve backward compatibility or include explicit migration path
+-  Policy changes align with existing XRTM philosophy and goals
+-  When this change affects published surfaces, downstream repo docs/templates/policies are updated or explicitly tracked
 
 ---
 

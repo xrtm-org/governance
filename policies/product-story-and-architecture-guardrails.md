@@ -75,25 +75,25 @@ Start a macro-reorganization plan **only if 3 or more** of the following conditi
 occur within the **next 2 coordinated release cycles**:
 
 1. **Unpublished dependency coupling**
-   - A release-train PR or release requires unpublished same-branch changes in **3 or more repos** to function.
+ - A release-train PR or release requires unpublished same-branch changes in **3 or more repos** to function.
 
 2. **Branch alias or ref hack recurrence**
-   - CI or release validation requires branch aliases, manual upstream ref overrides, or fallback-branch tricks in **2 or more repos**.
+ - CI or release validation requires branch aliases, manual upstream ref overrides, or fallback-branch tricks in **2 or more repos**.
 
 3. **Late compatibility failures**
-   - Downstream incompatibilities are discovered only at release-train or cross-repo integration time **2 or more times**, after repo-local CI passed.
+ - Downstream incompatibilities are discovered only at release-train or cross-repo integration time **2 or more times**, after repo-local CI passed.
 
 4. **Feature-spread overload**
-   - More than **33% of top-priority user-facing roadmap items** require code changes in **3 or more core repos**.
+ - More than **33% of top-priority user-facing roadmap items** require code changes in **3 or more core repos**.
 
 5. **Clean release impossibility**
-   - A coordinated release cannot be cut from clean branches and published artifacts without unpublished sibling branches or hand-carried local state.
+ - A coordinated release cannot be cut from clean branches and published artifacts without unpublished sibling branches or hand-carried local state.
 
 6. **Boundary-regression recurrence**
-   - We need another structural cleanup pass for the same hotspot categories again:
-     - `xrtm` orchestration sprawl
-     - `forecast` public API leakage
-     - `data/corpora` catch-all pressure
+ - We need another structural cleanup pass for the same hotspot categories again:
+ - `xrtm` orchestration sprawl
+ - `forecast` public API leakage
+ - `data/corpora` catch-all pressure
 
 ### Decision table
 
@@ -141,24 +141,24 @@ All public-facing surfaces should prove that story with these workflows, in this
 order:
 
 1. **Provider-free first success**
-   - prove the event-forecasting loop quickly
-   - no API key
-   - deterministic first run
+ - prove the event-forecasting loop quickly
+ - no API key
+ - deterministic first run
 
 2. **Benchmark and validation workflow**
-   - evaluate forecast quality
-   - compare runs
-   - inspect artifacts and metrics
+ - evaluate forecast quality
+ - compare runs
+ - inspect artifacts and metrics
 
 3. **Monitoring / history / reporting**
-   - run recurring workflows
-   - inspect changes over time
-   - export decision-friendly artifacts
+ - run recurring workflows
+ - inspect changes over time
+ - export decision-friendly artifacts
 
 4. **Local-LLM advanced path**
-   - advanced capability
-   - privacy/local-control story
-   - power-user path
+ - advanced capability
+ - privacy/local-control story
+ - power-user path
 
 ### Local-LLM positioning rule
 

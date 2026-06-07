@@ -2,7 +2,7 @@
 
 This policy defines the minimum gates for coordinated XRTM releases. It complements the PR acceptance policy: PR review decides whether a change is worth merging; release readiness decides whether the merged stack is safe to publish.
 
-For which repo version anchors the product release, why support-package versions may differ, and what a release train actually means, also use `policies/stack-versioning-policy.md`. For release claims that say users may choose CLI or WebUI for the same task, also use `policies/interface-parity-and-claim-ownership-policy.md`.
+For which repo version anchors the product release, why support-package versions may differ, and what a release train actually means, also use `policies/stack-versioning-policy.md`. For release claims that say users may choose CLI or for the same task, also use `policies/interface-parity-and-claim-ownership-policy.md`.
 
 ## Supported runtime boundary
 
@@ -57,11 +57,11 @@ The workspace clean-room lane is:
 
 - `./workspace.sh docker-provider-free-acceptance --artifact-source wheelhouse`
 - `./workspace.sh docker-provider-free-acceptance --artifact-source pypi`
-- `./workspace.sh docker-local-llm-acceptance --artifact-source wheelhouse`
+- `./workspace.sh docker--acceptance --artifact-source wheelhouse`
 
 The provider-free lane builds a disposable `docker run --rm` validation container, installs only from wheelhouse or PyPI artifacts, mounts the checkout read-only for release-pinned docs/examples, and persists logs plus run artifacts under `acceptance-studies/docker-provider-free/`.
 
-The local-LLM acceptance lane uses Docker Compose to keep the acceptance runner disposable while a separate llama.cpp service container owns model state for the bounded real-model smoke. It reads model weights from `XRTM_LOCAL_LLM_MODEL_DIR`/`XRTM_LOCAL_LLM_MODEL` (or explicit CLI overrides) and persists logs plus run artifacts under `acceptance-studies/docker-local-llm/`.
+The local-LLM acceptance lane uses Docker Compose to keep the acceptance runner disposable while a separate llama.cpp service container owns model state for the bounded real-model smoke. It reads model weights from `XRTM_LOCAL_LLM_MODEL_DIR`/`XRTM_LOCAL_LLM_MODEL` (or explicit CLI overrides) and persists logs plus run artifacts under `acceptance-studies/docker-/`.
 
 Release-readiness evidence should record:
 
@@ -115,12 +115,12 @@ Run the validation harness with release-gate mode:
 
 ```bash
 xrtm validate run \
-  --corpus-id xrtm-real-binary-v1 \
-  --release-gate-mode \
-  --provider mock \
-  --limit 100 \
-  --iterations 10 \
-  --output-dir .cache/validation
+ --corpus-id xrtm-real-binary-v1 \
+ --release-gate-mode \
+ --provider mock \
+ --limit 100 \
+ --iterations 10 \
+ --output-dir .cache/validation
 ```
 
 The validation artifact must show:
@@ -137,11 +137,11 @@ Run the performance harness with budget enforcement:
 
 ```bash
 xrtm perf run \
-  --scenario provider-free-smoke \
-  --iterations 5 \
-  --limit 10 \
-  --fail-on-budget \
-  --output performance.json
+ --scenario provider-free-smoke \
+ --iterations 5 \
+ --limit 10 \
+ --fail-on-budget \
+ --output performance.json
 ```
 
 The performance artifact must show:

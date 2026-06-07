@@ -14,9 +14,9 @@ We believe **Forecasting Future Events** is the only rigorous test of intelligen
 
 ## 3. The Solution
 **xrtm** provides the vertical infrastructure to shift AI from "Knowledge Retrieval" to "Future Prediction."
-1.  **Inference:** A runtime optimized for probabilistic reasoning, not just text generation.
-2.  **Evaluation:** Measuring success via **calibration** (knowing what you don't know) and **resolution** (accuracy), not semantic similarity.
-3.  **Training:** Optimizing models to internalize causal chains and Bayesian logic.
+1. **Inference:** A runtime optimized for probabilistic reasoning, not just text generation.
+2. **Evaluation:** Measuring success via **calibration** (knowing what you don't know) and **resolution** (accuracy), not semantic similarity.
+3. **Training:** Optimizing models to internalize causal chains and Bayesian logic.
 
 ## 4. The Ecosystem
 We organize our Open Source Software (OSS) into a closed loop that enforces temporal integrity.
