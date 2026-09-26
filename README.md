@@ -20,11 +20,11 @@ We separate our "Standards" from our "Implementation" to ensure consistency acro
 
 ### 1. The Forecast Object
 All inference engines and evaluation tools must exchange data using the **Forecast Object Standard**.
-* **Current Version:** v1.1
-* **Definition:** [schemas/forecast_object_v1.1.json](schemas/forecast_object_v1.1.json)
-* **Previous Version:** [schemas/forecast_object_v1.json](schemas/forecast_object_v1.json)
+* **Current Version:** v1.2
+* **Definition:** [schemas/forecast_object_v1.2.json](schemas/forecast_object_v1.2.json)
+* **Previous Versions:** [schemas/forecast_object_v1.1.json](schemas/forecast_object_v1.1.json), [schemas/forecast_object_v1.json](schemas/forecast_object_v1.json)
 * **Compatibility Policy:** [schemas/compatibility-policy.md](schemas/compatibility-policy.md)
-* **Key Features:** Establishes the shared forecast request / forecast result vocabulary, enforces strict `snapshot_time` and `reasoning_trace` requirements, and reserves compatibility guidance for legacy aliases such as `ForecastQuestion`, `ForecastOutput`, `question_id`, `structural_trace`, and `reporting_lane`. v1.1 adds optional parametric `distribution` support (Beta, Gaussian Bounded) for epistemic uncertainty; deprecated `confidence_interval` remains compatible.
+* **Key Features:** Establishes the shared forecast request / forecast result vocabulary, enforces strict `snapshot_time` and `reasoning_trace` requirements, and reserves compatibility guidance for legacy aliases such as `ForecastQuestion`, `ForecastOutput`, `question_id`, `structural_trace`, and `reporting_lane`. v1.1 adds optional parametric `distribution` support (Beta, Gaussian Bounded) for epistemic uncertainty; deprecated `confidence_interval` remains compatible. v1.2 adds optional runtime telemetry (`metadata.telemetry`: token usage, model/prompt provenance, parse status) aligned with `xrtm-data` 0.4.0 runtime fields.
 
 ## The Ecosystem
 This governance repository defines the standards for the following software components:

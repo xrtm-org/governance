@@ -1,0 +1,339 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://governance.xrtm.org/schemas/forecast_object_v1.2.json",
+  "title": "xrtm Forecast Object Standard (v1.2)",
+  "description": "Standardized schema for high-intelligence forecasting. v1.2 adds optional runtime telemetry (metadata.telemetry: token usage, model/prompt provenance, parse status) aligned with xrtm-data 0.4.0 runtime fields. Telemetry is operational and optional; forecast semantics are unchanged from v1.1.",
+  "type": "object",
+  "required": [
+    "metadata",
+    "question",
+    "prediction"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Operational and contextual metadata for the forecast record.",
+      "required": [
+        "id",
+        "created_at",
+        "snapshot_time"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this specific forecast instance."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The ISO 8601 timestamp when the forecast was generated."
+        },
+        "snapshot_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Zero Leakage: The specific 'Time T' at which the world state was frozen for this forecast. No data after this timestamp should have been available to the model."
+        },
+        "source_version": {
+          "type": "string",
+          "description": "The version of the inference engine (xrtm-forecast) or model used."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Logical tags for categorization (e.g., 'macro-economics', 'geopolitical')."
+        },
+        "telemetry": {
+          "type": "object",
+          "description": "Optional runtime telemetry for this forecast record. Runtime ForecastResult carries these as top-level fields (usage, provenance, parse_status); exporters serialize them here. Telemetry must never change forecast semantics and is not required for validity.",
+          "properties": {
+            "usage": {
+              "type": "object",
+              "description": "Token accounting for this forecast.",
+              "properties": {
+                "prompt_tokens": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Total input tokens billed."
+                },
+                "completion_tokens": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Total output tokens billed."
+                },
+                "cached_prompt_tokens": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Input tokens served from a provider prefix cache."
+                },
+                "reasoning_tokens": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Output tokens spent on chain-of-thought reasoning."
+                },
+                "total_tokens": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Total billed tokens (prompt + completion)."
+                }
+              }
+            },
+            "provenance": {
+              "type": "object",
+              "description": "Which engine, model, and prompt produced this forecast.",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "description": "Inference provider family (e.g. 'deepseek')."
+                },
+                "model_id": {
+                  "type": "string",
+                  "description": "Model identifier as requested."
+                },
+                "model_version": {
+                  "type": "string",
+                  "description": "Model version or checkpoint reported by the provider."
+                },
+                "prompt_id": {
+                  "type": "string",
+                  "description": "Identifier or version of the prompt template used."
+                },
+                "temperature": {
+                  "type": "number",
+                  "description": "Sampling temperature used for the run."
+                },
+                "thinking": {
+                  "type": "boolean",
+                  "description": "Whether provider reasoning/thinking mode was enabled."
+                },
+                "cache_hit": {
+                  "type": "boolean",
+                  "description": "True when the result was served from a cache."
+                },
+                "run_id": {
+                  "type": "string",
+                  "description": "Identifier shared by all calls of one forecast run."
+                }
+              }
+            },
+            "parse_status": {
+              "type": "string",
+              "enum": [
+                "ok",
+                "empty_content",
+                "invalid_json",
+                "schema_error",
+                "provider_error",
+                "unknown"
+              ],
+              "description": "Parse outcome for the model output that produced this forecast."
+            }
+          }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "description": "The subject of the forecast.",
+      "required": [
+        "id",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the underlying question."
+        },
+        "title": {
+          "type": "string",
+          "description": "The core question or statement being forecasted."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed context, background, and specific definitions."
+        },
+        "resolution_criteria": {
+          "type": "string",
+          "description": "The explicit, non-ambiguous rules for how the ground truth will be determined."
+        }
+      }
+    },
+    "prediction": {
+      "type": "object",
+      "description": "The probabilistic output and justification.",
+      "required": [
+        "probability",
+        "reasoning_trace"
+      ],
+      "properties": {
+        "probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The assigned probability of the primary outcome occurring. If distribution is provided, this MUST equal distribution.mean()."
+        },
+        "distribution": {
+          "type": "object",
+          "description": "Optional parametric probability distribution representing epistemic uncertainty. When provided, 'probability' must equal the distribution's expected value.",
+          "required": [
+            "family"
+          ],
+          "properties": {
+            "family": {
+              "type": "string",
+              "enum": [
+                "beta",
+                "gaussian_bounded",
+                "logit_normal"
+              ],
+              "description": "Distribution family. 'beta' is recommended for binary outcomes."
+            },
+            "alpha": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Beta shape parameter \u03b1 (required if family='beta'). Represents 'Yes-weighted' pseudo-count."
+            },
+            "beta": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Beta shape parameter \u03b2 (required if family='beta'). Represents 'No-weighted' pseudo-count."
+            },
+            "mean": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Distribution mean (used for gaussian_bounded family)."
+            },
+            "std": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Distribution standard deviation (used for gaussian_bounded family)."
+            },
+            "credible_interval": {
+              "type": "object",
+              "description": "Bayesian credible interval (highest density interval).",
+              "properties": {
+                "low": {
+                  "type": "number",
+                  "description": "Lower bound of the credible interval."
+                },
+                "high": {
+                  "type": "number",
+                  "description": "Upper bound of the credible interval."
+                },
+                "level": {
+                  "type": "number",
+                  "default": 0.9,
+                  "description": "The credible level (e.g., 0.9 for 90% interval)."
+                }
+              }
+            }
+          }
+        },
+        "confidence_interval": {
+          "type": "object",
+          "description": "DEPRECATED in v1.1. Use distribution.credible_interval instead. Retained for backward compatibility.",
+          "properties": {
+            "low": {
+              "type": "number"
+            },
+            "high": {
+              "type": "number"
+            },
+            "level": {
+              "type": "number",
+              "default": 0.9,
+              "description": "The confidence level (e.g., 0.9 for a 90% interval)."
+            }
+          }
+        },
+        "reasoning_trace": {
+          "type": "object",
+          "description": "The Bayesian-style sequence of assumptions and causal logic.",
+          "required": [
+            "narrative"
+          ],
+          "properties": {
+            "narrative": {
+              "type": "string",
+              "description": "A comprehensive narrative argument supporting the forecast."
+            },
+            "causal_graph": {
+              "type": "object",
+              "description": "The structured Mental Model representing the causal logic.",
+              "properties": {
+                "nodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "node_id",
+                      "event"
+                    ],
+                    "properties": {
+                      "node_id": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "string",
+                        "description": "An assumption or intermediate event in the reasoning chain."
+                      },
+                      "probability": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "edges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "source",
+                      "target"
+                    ],
+                    "properties": {
+                      "source": {
+                        "type": "string",
+                        "description": "ID of the source node."
+                      },
+                      "target": {
+                        "type": "string",
+                        "description": "ID of the target node."
+                      },
+                      "weight": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "description": "The conditional probability or causal strength."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "calibration_metrics": {
+          "type": "object",
+          "description": "Self-assessed or system-derived metrics for probabilistic integrity.",
+          "properties": {
+            "expected_brier_score": {
+              "type": "number"
+            },
+            "self_calibration_score": {
+              "type": "number",
+              "description": "The model's own estimate of how calibrated it is on this specific domain."
+            }
+          }
+        }
+      }
+    }
+  }
+}

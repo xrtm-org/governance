@@ -17,6 +17,7 @@ This policy governs changes to the Forecast Object contracts in this directory a
 | Snapshot time | `metadata.snapshot_time`. | Runtime `MetadataBase.snapshot_time`. | Required for zero-leakage. Do not add alternate timestamp names to the governance object. |
 | Resolution criteria | `question.resolution_criteria`. | Runtime `ForecastQuestion.resolution_criteria`. | Keep on the question object. Do not move criteria into evaluation result or resolution objects. |
 | Ground truth / resolution | Evaluation-owned `ForecastResolution(forecast_request_id, outcome, resolved_at, metadata)` and evaluator `ground_truth` inputs. | `ForecastResolution.question_id` remains a compatibility alias. | Do not add resolved outcomes to forecast payloads. Outcomes remain post-forecast evaluation data. |
+| Runtime telemetry | Governance `metadata.telemetry` (v1.2+). | Runtime `ForecastResult.usage`, `ForecastResult.provenance`, and `ForecastResult.parse_status` (top-level). | Runtime writes top-level fields; exporters map them into `metadata.telemetry`. Optional in v1.x — consumers must not require it for validity. |
 
 ## Temporary Shims
 
@@ -30,6 +31,16 @@ Temporary shims must be small, tested, and documented in the owning package:
 - `confidence_interval` remains readable and writable as a deprecated interval field.
 
 Shims must not silently change forecast meaning. Producers should not send both canonical and alias fields; if a consumer accepts both, the owning package must document and test its precedence rule.
+
+## Telemetry (v1.2)
+
+`metadata.telemetry` (governance v1.2+) mirrors optional runtime telemetry from `ForecastResult`:
+
+- `usage` — token accounting: `prompt_tokens`, `completion_tokens`, `cached_prompt_tokens`, `reasoning_tokens`, `total_tokens`.
+- `provenance` — `provider`, `model_id`, `model_version`, `prompt_id`, `temperature`, `thinking`, `cache_hit`, `run_id`.
+- `parse_status` — `ok`, `empty_content`, `invalid_json`, `schema_error`, `provider_error`, `unknown`.
+
+Rules: telemetry is optional and never changes forecast semantics; consumers must not require it while v1.x remains supported; exporters write it under `metadata.telemetry` while the runtime keeps top-level fields.
 
 ## Compatibility Tests
 
