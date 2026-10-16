@@ -85,7 +85,7 @@ Governance Forecast Object fragment:
  "narrative": "Evidence favors the event.",
  "causal_graph": {
  "nodes": [{"node_id": "n1", "event": "Signal observed", "probability": 0.7}],
- "edges": 
+ "edges": []
  }
  },
  "distribution": {
@@ -108,7 +108,7 @@ ForecastResult(
  "narrative": "Evidence favors the event.",
  "causal_graph": {
  "nodes": [{"node_id": "n1", "event": "Signal observed", "probability": 0.7}],
- "edges": ,
+ "edges": [],
  },
  },
  execution_trace=["ingestion", "forecast"],
