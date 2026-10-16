@@ -26,8 +26,8 @@ jobs:
 
       - name: Install Pydantic & Tools
         run: |
-          uv pip install pydantic check-jsonschema pytest --system
-      - name: Tests (normative examples + schemas)
+          uv pip install pydantic check-jsonschema pytest xrtm-data xrtm-eval xrtm-forecast xrtm-train --system
+      - name: Tests (normative examples + schemas + runtime conformance)
         run: |
           python3 -m pytest tests -q
       - name: Verify Pydantic Imports
