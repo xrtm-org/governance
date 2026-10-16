@@ -13,7 +13,7 @@ We separate our "Standards" from our "Implementation" to ensure consistency acro
 * **Stack Versioning:** For why package versions differ, what `xrtm` anchors, what release trains mean, and when package/docs/contracts/site updates must move together, see [policies/stack-versioning-policy.md](policies/stack-versioning-policy.md).
 * **Cross-Repo Compatibility:** For stable-surface changes, linked PR families, downstream validation, and published-surface coordination, see [policies/cross-repo-compatibility-policy.md](policies/cross-repo-compatibility-policy.md).
 * **Feature Status & Graduation:** For released vs next-release vs advanced vs redesign-required labeling, see [policies/feature-status-and-graduation-policy.md](policies/feature-status-and-graduation-policy.md).
-* **Interface Parity & Claims:** For when CLI//TUI/API capabilities can be called parity-ready, CLI-only, -only, advanced, or redesign-required, see [policies/interface-parity-and-claim-ownership-policy.md](policies/interface-parity-and-claim-ownership-policy.md).
+* **Interface Parity & Claims:** For when CLI/TUI/API capabilities can be called parity-ready, CLI-only, API-only, WebUI-only, advanced, or redesign-required, see [policies/interface-parity-and-claim-ownership-policy.md](policies/interface-parity-and-claim-ownership-policy.md).
 * **Product Story & Structure:** For canonical rerun rules, macro-reorg triggers, and the XRTM story hierarchy, see [policies/product-story-and-architecture-guardrails.md](policies/product-story-and-architecture-guardrails.md).
 
 ## Core Standards

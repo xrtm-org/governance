@@ -26,7 +26,10 @@ jobs:
 
       - name: Install Pydantic & Tools
         run: |
-          uv pip install pydantic check-jsonschema --system
+          uv pip install pydantic check-jsonschema pytest --system
+      - name: Tests (normative examples + schemas)
+        run: |
+          python3 -m pytest tests -q
       - name: Verify Pydantic Imports
         run: |
           # This ensures code is importable and has no syntax errors

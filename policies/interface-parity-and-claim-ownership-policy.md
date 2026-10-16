@@ -62,9 +62,9 @@ Examples of release-critical actions include:
 
 ## Claim rules
 
-1. Release-pinned docs may claim CLI/ choice only for `parity-ready`
+1. Release-pinned docs may claim CLI/TUI/API parity only for `parity-ready`
  capabilities.
-2. If a capability is CLI-only, -only, advanced, or redesign-required, the
+2. If a capability is CLI-only, API-only, WebUI-only, advanced, or redesign-required, the
  page must say so or keep it out of the default released path.
 3. Public site pages must not introduce parity claims before the product repo
  has the matrix update, implementation, contract update where needed, and
@@ -81,7 +81,7 @@ service-level parity tests. For `xrtm`, this means the normal lint, type, test,
 the touched surface.
 
 Gate 2 is required before releasing a user-facing parity expansion in `xrtm`.
-It must validate the -only path from a fresh install for the released task,
+It must validate the released path from a fresh install for the released task,
 not just prove the CLI command still works. If the released claim depends on a
 real OpenAI-compatible endpoint or coding-agent CLI contract, Gate 2 must include
 the corresponding supported runtime profile under the release-readiness policy.
